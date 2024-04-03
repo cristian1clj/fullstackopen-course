@@ -5,21 +5,21 @@ import Total from "./components/Total";
 const App = () => {
   const course = {
     name: 'Half Stack application development',
-    content: [
+    parts: [
       { topic: 'Fundamentals of React', exercises: 10 },
       { topic: 'Using props to pass data', exercises: 7 },
       { topic: 'State of a component', exercises: 14 },
     ]
   };
 
-  const totalExercises = course.content.reduce((result, content) => {
-    return result + content.exercises;
+  const totalExercises = course.parts.reduce((result, parts) => {
+    return result + parts.exercises;
   }, 0);
 
   return (
     <div>
       <Header courseName={course.name} />
-      <Content courseContent={course.content} />
+      <Content courseContent={course.parts} />
       <Total courseTotal={totalExercises} />
     </div>
   );

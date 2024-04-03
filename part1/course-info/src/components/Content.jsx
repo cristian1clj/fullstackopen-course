@@ -4,7 +4,7 @@ const Content = (props) => {
   return (
     <>
       {
-        props.courseContent.map(content => <Part key={content.topic} content={content} />)
+        props.courseContent.map(part => <Part key={part.topic} content={part} />)
       }
     </>
   );
