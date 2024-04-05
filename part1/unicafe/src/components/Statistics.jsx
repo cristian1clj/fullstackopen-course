@@ -6,14 +6,18 @@ const Statistics = ({ feedback }) => {
   const positiveFeedbacksPercent = `${(feedback.good / feedbacksTotal) * 100} %`;
 
   return (
-    <div>
-      <StatisticLine text='good' amount={feedback.good} />
-      <StatisticLine text='neutral' amount={feedback.neutral} />
-      <StatisticLine text='bad' amount={feedback.bad} />
-      <StatisticLine text='all' amount={feedbacksTotal} />
-      <StatisticLine text='average' amount={feedbacksAverage} />
-      <StatisticLine text='positive' amount={positiveFeedbacksPercent} />
-    </div>
+    <>
+      <table>
+        <tbody>
+          <StatisticLine text='good' amount={feedback.good} />
+          <StatisticLine text='neutral' amount={feedback.neutral} />
+          <StatisticLine text='bad' amount={feedback.bad} />
+          <StatisticLine text='all' amount={feedbacksTotal} />
+          <StatisticLine text='average' amount={feedbacksAverage} />
+          <StatisticLine text='positive' amount={positiveFeedbacksPercent} />
+        </tbody>
+      </table>
+    </>
   );
 }
 
