@@ -1,4 +1,4 @@
-import FeedbackButton from "./FeedbackButton";
+import Button from "./Button";
 
 const FeedbackControl = ({ setFeedback }) => {
   const handleButtonGood = () => {
@@ -21,10 +21,9 @@ const FeedbackControl = ({ setFeedback }) => {
 
   return (
     <div>
-      <h2>give feedback</h2>
-      <FeedbackButton text='good' onClick={handleButtonGood} />
-      <FeedbackButton text='neutral' onClick={handleButtonNeutral} />
-      <FeedbackButton text='bad' onClick={handleButtonBad} />
+      <Button text='good' onClick={handleButtonGood} />
+      <Button text='neutral' onClick={handleButtonNeutral} />
+      <Button text='bad' onClick={handleButtonBad} />
     </div>
   );
 }
