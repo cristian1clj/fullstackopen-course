@@ -5,7 +5,7 @@ const PersonsList = ({ persons }) => {
     <ul>
       {
         persons.map(person => {
-          return <PersonItem key={person.name} name={person.name} number={person.number} />
+          return <PersonItem key={person.id} name={person.name} number={person.number} />
         })
       }
     </ul>

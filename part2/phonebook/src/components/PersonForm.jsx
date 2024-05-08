@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const PersonForm = ({ setPersons, persons }) => {
+const PersonForm = ({ setPersons, persons, personsService }) => {
   const [newPerson, setNewPerson] = useState({
     name: '',
     number: ''
@@ -28,7 +28,8 @@ const PersonForm = ({ setPersons, persons }) => {
     } else if (persons.some(person => person.name.toLowerCase() === newPerson.name.toLowerCase())){
       window.alert(`${newPerson.name} is already added to phonebook`);
     } else {
-      setPersons([ ...persons, newPerson ]);
+      personsService.create(newPerson)
+        .then(personAdded => setPersons([ ...persons, personAdded ]));
     }
   }
 
