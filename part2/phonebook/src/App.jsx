@@ -35,7 +35,9 @@ function App() {
 
       <h3>Numbers</h3>
       <PersonsList 
+        setPersons={setPersons}
         persons={searching ? personsSearched : persons} 
+        personsService={personsService}
       />
     </>
   )
