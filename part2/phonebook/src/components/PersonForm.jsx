@@ -25,8 +25,23 @@ const PersonForm = ({ setPersons, persons, personsService }) => {
 
     if (newPerson.name === '' || newPerson.number === ''){
       window.alert('Make sure the fields are not empty');
+
     } else if (persons.some(person => person.name.toLowerCase() === newPerson.name.toLowerCase())){
-      window.alert(`${newPerson.name} is already added to phonebook`);
+      if (window.confirm(`${newPerson.name} is already added to phonebook, replace the old number with a new one?`)){
+        const previousPerson = persons.find(person => person.name.toLowerCase() === newPerson.name.toLowerCase());
+        personsService.update(previousPerson.id, newPerson)
+          .then(personUpdated => {
+            setPersons(persons.map(person => person.id === personUpdated.id ? personUpdated : person));
+          })
+          // eslint-disable-next-line no-unused-vars
+          .catch(error => {
+            alert(`
+            The person ${newPerson.name} was already deleted from server.
+            Please reload the page to show the changes.
+            `);
+          });
+      }
+      
     } else {
       personsService.create(newPerson)
         .then(personAdded => setPersons([ ...persons, personAdded ]));

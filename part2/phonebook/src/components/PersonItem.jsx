@@ -6,6 +6,13 @@ const PersonItem = ({ id, name, number, setPersons, personsService }) => {
           setPersons(persons => {
             return persons.filter(person => person.id !== personDeleted.id);
           });
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch(error => {
+          alert(`
+          The person ${name} was already deleted from server.
+          Please reload the page to show the changes.
+          `);
         });
     }
   }
