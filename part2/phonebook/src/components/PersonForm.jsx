@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const PersonForm = ({ setPersons, persons, personsService }) => {
+const PersonForm = ({ setPersons, persons, personsService, setMessage }) => {
   const [newPerson, setNewPerson] = useState({
     name: '',
     number: ''
@@ -35,16 +35,26 @@ const PersonForm = ({ setPersons, persons, personsService }) => {
           })
           // eslint-disable-next-line no-unused-vars
           .catch(error => {
-            alert(`
-            The person ${newPerson.name} was already deleted from server.
-            Please reload the page to show the changes.
-            `);
+            setMessage({
+              body: `Information of ${newPerson.name} has already been removed from server`,
+              type: 'error'
+            });
           });
+        
+        setMessage({
+          body: `Updated ${newPerson.name}`,
+          type: 'success'
+        });
       }
       
     } else {
       personsService.create(newPerson)
         .then(personAdded => setPersons([ ...persons, personAdded ]));
+      
+      setMessage({
+        body: `Added ${newPerson.name}`,
+        type: 'success'
+      });
     }
   }
 

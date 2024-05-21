@@ -1,6 +1,6 @@
 import PersonItem from "./PersonItem";
 
-const PersonsList = ({ persons, personsService, setPersons }) => {
+const PersonsList = ({ persons, personsService, setPersons, setMessage }) => {
   return (
     <ul>
       {
@@ -12,6 +12,7 @@ const PersonsList = ({ persons, personsService, setPersons }) => {
             number={person.number} 
             setPersons={setPersons}
             personsService={personsService}
+            setMessage={setMessage}
           />
         })
       }

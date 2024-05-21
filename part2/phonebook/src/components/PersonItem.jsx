@@ -1,4 +1,4 @@
-const PersonItem = ({ id, name, number, setPersons, personsService }) => {
+const PersonItem = ({ id, name, number, setPersons, personsService, setMessage }) => {
   const handleDelete = () => {
     if (window.confirm(`Delete ${name}?`)){
       personsService.remove(id)
@@ -9,11 +9,16 @@ const PersonItem = ({ id, name, number, setPersons, personsService }) => {
         })
         // eslint-disable-next-line no-unused-vars
         .catch(error => {
-          alert(`
-          The person ${name} was already deleted from server.
-          Please reload the page to show the changes.
-          `);
+          setMessage({
+            body: `Information of ${name} has already been removed from server`,
+            type: 'error'
+          });
         });
+      
+      setMessage({
+        body: `Deleted ${name}`,
+        type: 'success'
+      });
     }
   }
 
