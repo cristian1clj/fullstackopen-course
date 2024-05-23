@@ -26,7 +26,7 @@ function App() {
         countriesSearched.length > 10
         ? <p>Too many matches, specify another filter</p>
         : countriesSearched.length > 1
-          ? <CountriesList countriesSearched={countriesSearched} />
+          ? <CountriesList countriesSearched={countriesSearched} setCountriesSearched={setCountriesSearched} />
           : countriesSearched.length === 1
             ? <CountryCard countryName={countriesSearched[0]} countriesService={countriesService} />
             : null
