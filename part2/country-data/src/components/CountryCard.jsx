@@ -1,8 +1,10 @@
+import CountryInfo from "./CountryInfo";
+import CapitalWeather from "./CapitalWeather";
 import { useEffect, useState } from "react";
 
 const CountryCard = ({ countryName, countriesService }) => {
-  const [countryInfo, setCountryInfo] = useState({
-    name: '',
+  const [countryData, setCountryData] = useState({
+    abbreviation: '', 
     capital: '',
     area: '',
     languages: [],
@@ -11,34 +13,34 @@ const CountryCard = ({ countryName, countriesService }) => {
 
   useEffect(() => {
     countriesService.getByName(countryName)
-      .then(countryData => {
-        setCountryInfo({
-          name: countryData.name.common,
-          capital: countryData.capital,
-          area: countryData.area,
-          languages: Object.values(countryData.languages),
-          flag: countryData.flags.png
+      .then(data => {
+        setCountryData({
+          abbreviation: data.cca2, 
+          capital: data.capital,
+          area: data.area,
+          languages: Object.values(data.languages),
+          flag: data.flags.png
         });
       });
-  }, []);
+  });
 
   return (
     <div>
-      <h3>{countryInfo.name}</h3>
-
-      <p>capital {countryInfo.capital}</p>
-      <p>area {countryInfo.area}</p>
-
-      <h4>languages:</h4>
-      <ul>
-        {
-          countryInfo.languages.map(lang => {
-            return <li key={lang}>{lang}</li>
-          })
-        }
-      </ul>
-
-      <img src={countryInfo.flag} />
+      <h3>{countryName}</h3>
+      <CountryInfo 
+        capital={countryData.capital}
+        area={countryData.area}
+        languages={countryData.languages}
+        flag={countryData.flag}
+      />
+      {
+        countryData.capital === '' || countryData.abbreviation === ''
+        ? null
+        : <CapitalWeather 
+            capital={countryData.capital}
+            countryAbbreviation={countryData.abbreviation}
+          />
+      }
     </div>
   );
 }
