@@ -2,9 +2,10 @@ const PersonItem = ({ id, name, number, setPersons, personsService, setMessage }
   const handleDelete = () => {
     if (window.confirm(`Delete ${name}?`)){
       personsService.remove(id)
-        .then(personDeleted => {
+        // eslint-disable-next-line no-unused-vars
+        .then(res => {
           setPersons(persons => {
-            return persons.filter(person => person.id !== personDeleted.id);
+            return persons.filter(person => person.id !== id);
           });
         })
         // eslint-disable-next-line no-unused-vars
