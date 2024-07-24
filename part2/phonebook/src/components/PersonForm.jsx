@@ -23,10 +23,7 @@ const PersonForm = ({ setPersons, persons, personsService, setMessage }) => {
   const addPerson = (e) => {
     e.preventDefault();
 
-    if (newPerson.name === '' || newPerson.number === ''){
-      window.alert('Make sure the fields are not empty');
-
-    } else if (persons.some(person => person.name.toLowerCase() === newPerson.name.toLowerCase())){
+    if (persons.some(person => person.name.toLowerCase() === newPerson.name.toLowerCase())){
       if (window.confirm(`${newPerson.name} is already added to phonebook, replace the old number with a new one?`)){
         const previousPerson = persons.find(person => person.name.toLowerCase() === newPerson.name.toLowerCase());
         personsService.update(previousPerson.id, newPerson)
@@ -49,12 +46,19 @@ const PersonForm = ({ setPersons, persons, personsService, setMessage }) => {
       
     } else {
       personsService.create(newPerson)
-        .then(personAdded => setPersons([ ...persons, personAdded ]));
-      
-      setMessage({
-        body: `Added ${newPerson.name}`,
-        type: 'success'
-      });
+        .then(personAdded => {
+          setPersons([ ...persons, personAdded ])
+          setMessage({
+            body: `Added ${newPerson.name}`,
+            type: 'success'
+          })
+        })
+        .catch(error => {
+          setMessage({
+            body: error.response.data.error,
+            type: 'error'
+          })
+        })
     }
   }
 
